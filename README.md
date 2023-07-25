@@ -68,79 +68,124 @@ For macOS using homebrew:
  $ git clone --depth=1 https://github.com/alsyundawy/dnsperftest/
  $ cd dnsperftest
  $ bash ./dnstest.sh 
-               test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average 
-cloudflare     1 ms    1 ms    1 ms    2 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.10
-google         22 ms   1 ms    4 ms    24 ms   1 ms    19 ms   3 ms    56 ms   21 ms   21 ms     17.20
-quad9          10 ms   19 ms   10 ms   10 ms   10 ms   10 ms   10 ms   10 ms   10 ms   55 ms     15.40
-opendns        39 ms   2 ms    2 ms    20 ms   2 ms    72 ms   2 ms    39 ms   39 ms   3 ms      22.00
-norton         2 ms    2 ms    2 ms    2 ms    1 ms    2 ms    2 ms    1 ms    2 ms    2 ms      1.80
-cleanbrowsing  11 ms   14 ms   11 ms   11 ms   10 ms   10 ms   11 ms   36 ms   11 ms   13 ms     13.80
-yandex         175 ms  209 ms  175 ms  181 ms  188 ms  179 ms  178 ms  179 ms  177 ms  208 ms    184.90
-adguard        200 ms  200 ms  200 ms  199 ms  202 ms  200 ms  202 ms  200 ms  199 ms  248 ms    205.00
-neustar        2 ms    2 ms    2 ms    2 ms    1 ms    2 ms    2 ms    2 ms    2 ms    2 ms      1.90
-comodo         21 ms   22 ms   22 ms   22 ms   22 ms   22 ms   22 ms   21 ms   22 ms   24 ms     22.00
+                     test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average
+127.0.0.1            1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
+::1                  1 ms    1 ms    1 ms    1 ms    4 ms    1 ms    1 ms    1 ms    4 ms    1 ms      1.60
+cloudflare1          16 ms   12 ms   12 ms   12 ms   16 ms   12 ms   16 ms   12 ms   12 ms   16 ms     13.60
+cloudflare2          12 ms   16 ms   12 ms   16 ms   16 ms   16 ms   16 ms   16 ms   12 ms   12 ms     14.40
+google               20 ms   16 ms   20 ms   16 ms   16 ms   16 ms   16 ms   32 ms   16 ms   16 ms     18.40
+quad9                16 ms   16 ms   64 ms   28 ms   16 ms   24 ms   16 ms   44 ms   16 ms   20 ms     26.00
+opendns              12 ms   12 ms   12 ms   12 ms   56 ms   192 ms  12 ms   16 ms   12 ms   16 ms     35.20
+adguard              260 ms  240 ms  240 ms  256 ms  244 ms  240 ms  260 ms  336 ms  308 ms  260 ms    264.40
+level3-1             1000 ms 1000 ms 1000 ms 1000 ms 12 ms   1000 ms 12 ms   1000 ms 12 ms   12 ms     604.80
+level3-2             1000 ms 12 ms   1000 ms 12 ms   1000 ms 12 ms   1000 ms 1000 ms 1000 ms 12 ms     604.80
+freenom              12 ms   56 ms   16 ms   60 ms   48 ms   184 ms  104 ms  348 ms  324 ms  28 ms     118.00
+DNS.Watch            208 ms  1000 ms 1000 ms 1000 ms 256 ms  1000 ms 1000 ms 1000 ms 1000 ms 1000 ms   846.40
+norton               44 ms   44 ms   44 ms   44 ms   44 ms   40 ms   40 ms   44 ms   40 ms   68 ms     45.20
+cleanbrowsing        12 ms   16 ms   12 ms   12 ms   16 ms   12 ms   12 ms   16 ms   12 ms   244 ms    36.40
+yandex               204 ms  228 ms  220 ms  204 ms  220 ms  216 ms  204 ms  280 ms  260 ms  244 ms    228.00
+neustar              48 ms   48 ms   48 ms   48 ms   48 ms   44 ms   44 ms   140 ms  48 ms   104 ms    62.00
+comodo               16 ms   16 ms   16 ms   16 ms   16 ms   12 ms   16 ms   16 ms   16 ms   16 ms     15.60
+nextdns              16 ms   16 ms   16 ms   16 ms   20 ms   16 ms   16 ms   20 ms   16 ms   20 ms     17.20
+Verisign             48 ms   44 ms   44 ms   44 ms   44 ms   44 ms   48 ms   44 ms   44 ms   116 ms    52.00
+alidns               1 ms    4 ms    1 ms    1 ms    1 ms    1 ms    1 ms    4 ms    4 ms    4 ms      2.20
+SafeDNS              16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   20 ms   16 ms   56 ms     20.40
+DynDNS               192 ms  224 ms  184 ms  192 ms  180 ms  180 ms  192 ms  196 ms  216 ms  204 ms    196.00
+OneDNS               344 ms  332 ms  332 ms  344 ms  336 ms  344 ms  352 ms  1476 ms 336 ms  1000 ms   519.60
+Baidu                192 ms  84 ms   120 ms  100 ms  48 ms   88 ms   92 ms   168 ms  48 ms   88 ms     102.80
+HE.NET               12 ms   12 ms   160 ms  16 ms   12 ms   16 ms   12 ms   12 ms   16 ms   24 ms     29.20
 ```
 
 To sort with the fastest first, add `sort -k 22 -n` at the end of the command:
 
 ```
-  $ bash ./dnstest.sh |sort -k 22 -n
-               test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average 
-cloudflare     1 ms    1 ms    1 ms    4 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.30
-norton         2 ms    2 ms    2 ms    2 ms    2 ms    2 ms    2 ms    2 ms    2 ms    2 ms      2.00
-neustar        2 ms    2 ms    2 ms    2 ms    1 ms    2 ms    2 ms    2 ms    2 ms    22 ms     3.90
-cleanbrowsing  11 ms   23 ms   11 ms   11 ms   11 ms   11 ms   11 ms   13 ms   12 ms   11 ms     12.50
-google         4 ms    4 ms    3 ms    21 ms   21 ms   61 ms   3 ms    21 ms   21 ms   22 ms     18.10
-opendns        2 ms    2 ms    2 ms    39 ms   2 ms    75 ms   2 ms    21 ms   39 ms   13 ms     19.70
-comodo         22 ms   23 ms   22 ms   22 ms   22 ms   22 ms   22 ms   22 ms   22 ms   23 ms     22.20
-quad9          10 ms   37 ms   10 ms   10 ms   10 ms   145 ms  10 ms   10 ms   10 ms   20 ms     27.20
-yandex         177 ms  216 ms  178 ms  182 ms  186 ms  177 ms  183 ms  174 ms  186 ms  222 ms    188.10
-adguard        199 ms  210 ms  200 ms  201 ms  202 ms  202 ms  199 ms  200 ms  198 ms  201 ms    201.20
+  $ bash ./dnstest.sh | sort -k 22 -n
+                     test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average
+127.0.0.1            1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
+::1                  1 ms    1 ms    1 ms    1 ms    4 ms    1 ms    1 ms    1 ms    4 ms    1 ms      1.60
+cloudflare1          16 ms   12 ms   12 ms   12 ms   16 ms   12 ms   16 ms   12 ms   12 ms   16 ms     13.60
+cloudflare2          12 ms   16 ms   12 ms   16 ms   16 ms   16 ms   16 ms   16 ms   12 ms   12 ms     14.40
+google               20 ms   16 ms   20 ms   16 ms   16 ms   16 ms   16 ms   32 ms   16 ms   16 ms     18.40
+quad9                16 ms   16 ms   64 ms   28 ms   16 ms   24 ms   16 ms   44 ms   16 ms   20 ms     26.00
+opendns              12 ms   12 ms   12 ms   12 ms   56 ms   192 ms  12 ms   16 ms   12 ms   16 ms     35.20
+adguard              260 ms  240 ms  240 ms  256 ms  244 ms  240 ms  260 ms  336 ms  308 ms  260 ms    264.40
+level3-1             1000 ms 1000 ms 1000 ms 1000 ms 12 ms   1000 ms 12 ms   1000 ms 12 ms   12 ms     604.80
+level3-2             1000 ms 12 ms   1000 ms 12 ms   1000 ms 12 ms   1000 ms 1000 ms 1000 ms 12 ms     604.80
+freenom              12 ms   56 ms   16 ms   60 ms   48 ms   184 ms  104 ms  348 ms  324 ms  28 ms     118.00
+DNS.Watch            208 ms  1000 ms 1000 ms 1000 ms 256 ms  1000 ms 1000 ms 1000 ms 1000 ms 1000 ms   846.40
+norton               44 ms   44 ms   44 ms   44 ms   44 ms   40 ms   40 ms   44 ms   40 ms   68 ms     45.20
+cleanbrowsing        12 ms   16 ms   12 ms   12 ms   16 ms   12 ms   12 ms   16 ms   12 ms   244 ms    36.40
+yandex               204 ms  228 ms  220 ms  204 ms  220 ms  216 ms  204 ms  280 ms  260 ms  244 ms    228.00
+neustar              48 ms   48 ms   48 ms   48 ms   48 ms   44 ms   44 ms   140 ms  48 ms   104 ms    62.00
+comodo               16 ms   16 ms   16 ms   16 ms   16 ms   12 ms   16 ms   16 ms   16 ms   16 ms     15.60
+nextdns              16 ms   16 ms   16 ms   16 ms   20 ms   16 ms   16 ms   20 ms   16 ms   20 ms     17.20
+Verisign             48 ms   44 ms   44 ms   44 ms   44 ms   44 ms   48 ms   44 ms   44 ms   116 ms    52.00
+alidns               1 ms    4 ms    1 ms    1 ms    1 ms    1 ms    1 ms    4 ms    4 ms    4 ms      2.20
+SafeDNS              16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   20 ms   16 ms   56 ms     20.40
+DynDNS               192 ms  224 ms  184 ms  192 ms  180 ms  180 ms  192 ms  196 ms  216 ms  204 ms    196.00
+OneDNS               344 ms  332 ms  332 ms  344 ms  336 ms  344 ms  352 ms  1476 ms 336 ms  1000 ms   519.60
+Baidu                192 ms  84 ms   120 ms  100 ms  48 ms   88 ms   92 ms   168 ms  48 ms   88 ms     102.80
+HE.NET               12 ms   12 ms   160 ms  16 ms   12 ms   16 ms   12 ms   12 ms   16 ms   24 ms     29.20
 ```
 
 To test using the IPv6 addresses, add the IPv6 option:
 
 ```
-  $ bash ./dnstest.sh ipv6| sort -k 22 -n
-                     test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average 
-cleanbrowsing-v6     1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
-cloudflare-v6        1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    5 ms    1 ms    1 ms    1 ms      1.40
-quad9-v6             1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    21 ms     3.00
-8.8.8.8              7 ms    1 ms    16 ms   1 ms    1 ms    24 ms   1 ms    8 ms    1 ms    7 ms      6.70
-neustar-v6           1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    60 ms     6.90
-opendns-v6           1 ms    1 ms    1 ms    1 ms    1 ms    62 ms   1 ms    1 ms    29 ms   1 ms      9.90
-google-v6            8 ms    8 ms    7 ms    8 ms    14 ms   67 ms   1 ms    7 ms    8 ms    61 ms     18.90
-adguard-v6           52 ms   55 ms   52 ms   53 ms   52 ms   56 ms   52 ms   55 ms   52 ms   57 ms     53.60
-yandex-v6            177 ms  178 ms  178 ms  179 ms  179 ms  178 ms  179 ms  178 ms  178 ms  223 ms    182.70
+  $ bash ./dnstest.sh ipv6 | sort -k 22 -n
+                     test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average
+::1                  1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
+127.0.0.1            1 ms    1 ms    1 ms    1 ms    1 ms    4 ms    1 ms    8 ms    1 ms    1 ms      2.00
+cloudflare-v6        16 ms   12 ms   16 ms   12 ms   12 ms   16 ms   16 ms   12 ms   12 ms   12 ms     13.60
+quad9-v6             16 ms   16 ms   16 ms   16 ms   16 ms   12 ms   16 ms   16 ms   16 ms   16 ms     15.60
+cloudflare-v62       16 ms   16 ms   16 ms   12 ms   16 ms   16 ms   20 ms   16 ms   16 ms   16 ms     16.00
+cleanbrowsing-v6     16 ms   16 ms   16 ms   16 ms   16 ms   12 ms   12 ms   16 ms   28 ms   16 ms     16.40
+comodo-v6            16 ms   12 ms   16 ms   64 ms   12 ms   12 ms   12 ms   88 ms   12 ms   16 ms     26.00
+google-v6            20 ms   16 ms   16 ms   20 ms   24 ms   208 ms  16 ms   20 ms   16 ms   24 ms     38.00
+opendns-v6           20 ms   16 ms   56 ms   16 ms   16 ms   252 ms  12 ms   84 ms   12 ms   56 ms     54.00
+neustar-v6           48 ms   84 ms   52 ms   48 ms   48 ms   44 ms   52 ms   260 ms  52 ms   132 ms    82.00
+yandex-v6            216 ms  200 ms  200 ms  228 ms  220 ms  200 ms  232 ms  260 ms  228 ms  420 ms    240.40
+adguard-v6           272 ms  260 ms  272 ms  260 ms  252 ms  264 ms  244 ms  480 ms  324 ms  252 ms    288.00
 ```
 
 To test both IPv6 and IPv4, add the "all" option:
 ```
-  $ bash ./dnstest.sh all| sort -k 22 -n
-                     test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average 
-cleanbrowsing        1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
-cleanbrowsing-v6     1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
-cloudflare-v6        1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
-neustar              1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
-nextdns              1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
-quad9-v6             1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
-cloudflare           1 ms    1 ms    1 ms    1 ms    1 ms    2 ms    1 ms    1 ms    1 ms    1 ms      1.10
-quad9                1 ms    1 ms    1 ms    2 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.10
-google               1 ms    1 ms    6 ms    1 ms    1 ms    6 ms    1 ms    7 ms    9 ms    7 ms      4.00
-8.8.8.8              6 ms    1 ms    25 ms   1 ms    1 ms    6 ms    1 ms    7 ms    1 ms    7 ms      5.60
-neustar-v6           1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    64 ms     7.30
-opendns-v6           7 ms    1 ms    21 ms   8 ms    1 ms    1 ms    1 ms    6 ms    1 ms    29 ms     7.60
-opendns              1 ms    1 ms    27 ms   27 ms   1 ms    67 ms   1 ms    6 ms    1 ms    27 ms     15.90
-comodo               1 ms    1 ms    1 ms    1 ms    4 ms    1 ms    1 ms    1 ms    1 ms    150 ms    16.20
-google-v6            7 ms    6 ms    33 ms   7 ms    7 ms    87 ms   7 ms    8 ms    8 ms    25 ms     19.50
-level3               27 ms   26 ms   25 ms   27 ms   27 ms   25 ms   27 ms   27 ms   25 ms   28 ms     26.40
-norton               28 ms   26 ms   28 ms   26 ms   26 ms   28 ms   27 ms   27 ms   27 ms   27 ms     27.00
-adguard-v6           52 ms   54 ms   55 ms   56 ms   52 ms   52 ms   52 ms   53 ms   53 ms   54 ms     53.30
-adguard              58 ms   58 ms   58 ms   58 ms   60 ms   58 ms   60 ms   60 ms   58 ms   60 ms     58.80
-freenom              140 ms  140 ms  140 ms  145 ms  135 ms  140 ms  140 ms  140 ms  140 ms  134 ms    139.40
-yandex-v6            178 ms  179 ms  178 ms  179 ms  178 ms  178 ms  178 ms  179 ms  179 ms  205 ms    181.10
-yandex               178 ms  178 ms  177 ms  179 ms  178 ms  174 ms  180 ms  178 ms  179 ms  222 ms    182.30
-
+  $ bash ./dnstest.sh all | sort -k 22 -n
+                     test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average
+::1                  1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms    1 ms      1.00
+127.0.0.1            4 ms    1 ms    1 ms    1 ms    1 ms    4 ms    1 ms    1 ms    1 ms    1 ms      1.60
+alidns               1 ms    1 ms    1 ms    4 ms    4 ms    4 ms    4 ms    4 ms    4 ms    4 ms      3.10
+level3-2             12 ms   12 ms   16 ms   12 ms   12 ms   12 ms   12 ms   12 ms   8 ms    12 ms     12.00
+cloudflare1          12 ms   12 ms   12 ms   16 ms   12 ms   12 ms   12 ms   12 ms   12 ms   16 ms     12.80
+cloudflare-v6        16 ms   12 ms   12 ms   12 ms   12 ms   12 ms   12 ms   12 ms   16 ms   12 ms     12.80
+cloudflare-v62       12 ms   12 ms   12 ms   12 ms   12 ms   12 ms   16 ms   16 ms   16 ms   12 ms     13.20
+cloudflare2          12 ms   12 ms   12 ms   16 ms   12 ms   12 ms   16 ms   28 ms   16 ms   16 ms     15.20
+google-v6            12 ms   16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   20 ms   16 ms   20 ms     16.40
+quad9-v6             16 ms   20 ms   16 ms   12 ms   16 ms   16 ms   16 ms   16 ms   20 ms   20 ms     16.80
+nextdns              16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   24 ms   20 ms   20 ms     17.60
+HE.NET               16 ms   12 ms   12 ms   12 ms   12 ms   16 ms   16 ms   64 ms   12 ms   36 ms     20.80
+quad9                16 ms   12 ms   16 ms   16 ms   16 ms   16 ms   24 ms   16 ms   16 ms   112 ms    26.00
+opendns-v6           16 ms   12 ms   16 ms   16 ms   52 ms   12 ms   12 ms   92 ms   16 ms   20 ms     26.40
+cleanbrowsing        16 ms   24 ms   16 ms   16 ms   20 ms   16 ms   24 ms   16 ms   120 ms  20 ms     28.80
+comodo               16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   16 ms   20 ms   156 ms  16 ms     30.40
+opendns              12 ms   12 ms   12 ms   16 ms   12 ms   188 ms  12 ms   84 ms   12 ms   16 ms     37.60
+google               16 ms   16 ms   16 ms   16 ms   32 ms   224 ms  16 ms   20 ms   24 ms   20 ms     40.00
+cleanbrowsing-v6     12 ms   16 ms   12 ms   16 ms   144 ms  16 ms   20 ms   112 ms  36 ms   20 ms     40.40
+comodo-v6            12 ms   12 ms   12 ms   56 ms   52 ms   192 ms  12 ms   88 ms   12 ms   16 ms     46.40
+neustar-v6           52 ms   48 ms   52 ms   52 ms   52 ms   48 ms   44 ms   44 ms   48 ms   48 ms     48.80
+Verisign             44 ms   44 ms   40 ms   44 ms   44 ms   40 ms   44 ms   48 ms   44 ms   116 ms    50.80
+neustar              44 ms   44 ms   44 ms   60 ms   44 ms   48 ms   48 ms   44 ms   48 ms   104 ms    52.80
+norton               44 ms   44 ms   44 ms   40 ms   44 ms   40 ms   44 ms   80 ms   44 ms   112 ms    53.60
+freenom              16 ms   24 ms   164 ms  56 ms   24 ms   12 ms   16 ms   212 ms  236 ms  96 ms     85.60
+level3-1             12 ms   1000 ms 12 ms   12 ms   12 ms   16 ms   20 ms   12 ms   12 ms   12 ms     112.00
+SafeDNS              16 ms   60 ms   528 ms  92 ms   16 ms   16 ms   16 ms   240 ms  16 ms   132 ms    113.20
+Baidu                92 ms   116 ms  116 ms  88 ms   116 ms  120 ms  88 ms   272 ms  84 ms   116 ms    120.80
+DynDNS               188 ms  188 ms  192 ms  192 ms  180 ms  192 ms  180 ms  184 ms  244 ms  192 ms    193.20
+yandex-v6            224 ms  200 ms  228 ms  204 ms  204 ms  224 ms  220 ms  208 ms  204 ms  208 ms    212.40
+yandex               208 ms  204 ms  216 ms  220 ms  204 ms  208 ms  216 ms  492 ms  224 ms  240 ms    243.20
+adguard              240 ms  236 ms  252 ms  256 ms  256 ms  236 ms  256 ms  348 ms  260 ms  256 ms    259.60
+adguard-v6           240 ms  264 ms  244 ms  240 ms  244 ms  264 ms  240 ms  372 ms  264 ms  276 ms    264.80
+OneDNS               348 ms  348 ms  332 ms  328 ms  332 ms  328 ms  340 ms  340 ms  352 ms  348 ms    339.60
+DNS.Watch            204 ms  1000 ms 176 ms  1000 ms 204 ms  1000 ms 1000 ms 1000 ms 1000 ms 1000 ms   758.40
 ```
 
 
@@ -150,3 +195,7 @@ If you receive an error `$'\r': command not found`, convert the file to a Linux-
 
 
 # Credit Special Thank's To CleanBrowsing
+
+**Anda bebas untuk mengubah, mendistribusikan script ini untuk keperluan anda**
+
+### Anda Memang Luar Biasa | Harry DS Alsyundawy | Kaum Rebahan Garis Keras & Militan
