@@ -35,7 +35,7 @@ Includes by default:
  * instagram.com
  * wikipedia.org
  * twitter.com
- * www.tokopedia.com
+ * tokopedia.com
  * whatsapp.com
  * tiktok.com
 
