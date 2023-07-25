@@ -4,18 +4,28 @@ Shell script to test the performance of the most popular DNS resolvers from your
 
 Includes by default:
  * CloudFlare 1.1.1.1
+ * CloudFlare 1.1.1.2209.244.0.3
  * Level3 4.2.2.1
+ * Level3 209.244.0.3
  * Google 8.8.8.8
  * Quad9 9.9.9.9
  * Freenom 80.80.80.80
- * OpenDNS
- * Norton
- * CleanBrowsing
- * Yandex
- * AdGuard
- * Neustar
- * Comodo
- * NextDNS
+ * OpenDNS 208.67.222.123
+ * Norton 199.85.126.20
+ * CleanBrowsing 185.228.168.168
+ * Yandex 77.88.8.7
+ * AdGuard 176.103.130.132
+ * Neustar 156.154.70.3
+ * Comodo 8.26.56.26
+ * NextDNS 45.90.28.202
+ * Verisign 64.6.64.6
+ * alidns 223.5.5.5
+ * SafeDNS 195.46.39.39
+ * DynDNS 216.146.35.35
+ * OneDNS 117.50.11.11
+ * Baidu 180.76.76.76
+ * HE.NET 74.82.42.42
+ * DNS.Watch 84.200.69.80
 
 # Required 
 
@@ -118,3 +128,6 @@ yandex               178 ms  178 ms  177 ms  179 ms  178 ms  174 ms  180 ms  178
 # For Windows users using the Linux subsystem
 
 If you receive an error `$'\r': command not found`, convert the file to a Linux-compatible line endings using:
+
+
+# Credit Special Thank's To CleanBrowsing
