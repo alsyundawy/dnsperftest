@@ -27,6 +27,18 @@ Includes by default:
  * HE.NET 74.82.42.42
  * DNS.Watch 84.200.69.80
 
+ # List Domain Test
+ * google.com
+ * telegram.org
+ * facebook.com
+ * youtube.com
+ * instagram.com
+ * wikipedia.org
+ * twitter.com
+ * www.tokopedia.com
+ * whatsapp.com
+ * tiktok.com
+
 # Required 
 
 You need to install bc and dig. 
