@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+# Check for required commands
+for cmd in bc dig; do
+    command -v "$cmd" > /dev/null || { printf "error: %s was not found. Please install %s.\n" "$cmd" "$cmd"; exit 1; }
+done
 
-command -v bc > /dev/null || { echo "error: bc was not found. Please install bc."; exit 1; }
-{ command -v drill > /dev/null && dig=drill; } || { command -v dig > /dev/null && dig=dig; } || { echo "error: dig was not found. Please install dnsutils."; exit 1; }
+# Get nameservers from /etc/resolv.conf
+NAMESERVERS=$(grep "^nameserver" /etc/resolv.conf | cut -d " " -f 2 | sed 's/\(.*\)/&#&/')
 
-
-NAMESERVERS=`cat /etc/resolv.conf | grep ^nameserver | cut -d " " -f 2 | sed 's/\(.*\)/&#&/'`
-
+# Define providers for IPv4 and IPv6
 PROVIDERSV4="
 1.1.1.1#cloudflare1
 1.1.1.2#cloudflare2
@@ -46,71 +48,60 @@ PROVIDERSV6="
 2620:119:53::53#comodo-v6
 "
 
-# Testing for IPv6
-$dig +short +tries=1 +time=2 +stats @2606:4700:4700::1111 alsyundawy.my.id | grep '172.67.134.149\|104.21.6.70' >/dev/null 2>&1
-if [ $? = 0 ]; then
+# Test for IPv6 support by querying alsyundawy.my.id with cloudflare-v6 nameserver and checking for expected IPs in the output 
+if dig +short +tries=1 +time=2 +stats @2606:4700:4700::1111 alsyundawy.my.id | grep -q '172\.67\.134\.149\|104\.21\.6\.70'; then 
     hasipv6="true"
 fi
 
-providerstotest=$PROVIDERSV4
-
-if [ "x$1" = "xipv6" ]; then
-    if [ "x$hasipv6" = "x" ]; then
-        echo "error: IPv6 support not found. Unable to do the ipv6 test."; exit 1;
-    fi
-    providerstotest=$PROVIDERSV6
-
-elif [ "x$1" = "xipv4" ]; then
-    providerstotest=$PROVIDERSV4
-
-elif [ "x$1" = "xall" ]; then
-    if [ "x$hasipv6" = "x" ]; then
-        providerstotest=$PROVIDERSV4
-    else
-        providerstotest="$PROVIDERSV4 $PROVIDERSV6"
-    fi
-else
-    providerstotest=$PROVIDERSV4
-fi
+case "$1" in 
+    ipv4) providerstotest=$PROVIDERSV4;;
+    ipv6) 
+        if [[ -z "$hasipv6" ]]; then 
+            printf "error: IPv6 support not found.\n"
+            exit 1;
+        fi 
+        providerstotest=$PROVIDERSV6;;
+    all) 
+        if [[ -z "$hasipv6" ]]; then 
+            providerstotest=$PROVIDERSV4;
+        else 
+            providerstotest="$PROVIDERSV4 $PROVIDERSV6"
+        fi;;
+    *) providerstotest=$PROVIDERSV4;;
+esac
 
     
 
-# Domains to test. Duplicated domains are ok
+# Domains to test (duplicates are ok)
 DOMAINS2TEST="google.com telegram.org facebook.com youtube.com instagram.com wikipedia.org twitter.com www.tokopedia.com whatsapp.com tiktok.com"
 
-
 totaldomains=0
+
 printf "%-21s" ""
-for d in $DOMAINS2TEST; do
-    totaldomains=$((totaldomains + 1))
+for d in $DOMAINS2TEST; do 
+    (( totaldomains++ ))
     printf "%-8s" "test$totaldomains"
 done
-printf "%-8s" "Average"
-echo ""
 
+printf "%-8s\n" "Average"
 
-for p in $NAMESERVERS $providerstotest; do
+for p in $NAMESERVERS $providerstotest; do 
     pip=${p%%#*}
     pname=${p##*#}
     ftime=0
 
     printf "%-21s" "$pname"
-    for d in $DOMAINS2TEST; do
-        ttime=`$dig +tries=1 +time=2 +stats @$pip $d |grep "Query time:" | cut -d : -f 2- | cut -d " " -f 2`
-        if [ -z "$ttime" ]; then
-	        #let's have time out be 1s = 1000ms
-	        ttime=1000
-        elif [ "x$ttime" = "x0" ]; then
-	        ttime=1
-	    fi
+    for d in $DOMAINS2TEST; do 
+        ttime=$(dig +tries=1 +time=2 +stats @$pip $d | grep "Query time:" | cut -d : -f 2- | cut -d " " -f 2)
+        [[ -z "$ttime" ]] && ttime=1000 # timeout is 1000 ms
+        [[ "$ttime" == 0 ]] && ttime=1 # minimum time is 1 ms
 
         printf "%-8s" "$ttime ms"
-        ftime=$((ftime + ttime))
+        (( ftime += ttime ))
     done
-    avg=`bc -l <<< "scale=2; $ftime/$totaldomains"`
+    avg=$(bc -l <<< "scale=2; $ftime/$totaldomains")
 
-    echo "  $avg"
+    printf "  %s\n" "$avg"
 done
-
 
 exit 0;
