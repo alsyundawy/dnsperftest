@@ -43,10 +43,17 @@ Includes by default:
 
 You need to install bc and dig. 
 
-For Ubuntu:
+For Ubuntu / Debian Based:
 
 ```
  $ sudo apt-get install bc dnsutils
+```
+
+For RedHat / RPM Based:
+
+```
+ $ sudo yum install bc dnsutils
+ $ sudo dnf install bc dnsutils
 ```
 
 For macOS using homebrew:
