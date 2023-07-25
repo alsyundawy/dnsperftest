@@ -4,7 +4,7 @@ Shell script to test the performance of the most popular DNS resolvers from your
 
 Includes by default:
  * CloudFlare 1.1.1.1
- * CloudFlare 1.1.1.2209.244.0.3
+ * CloudFlare 1.1.1.2
  * Level3 4.2.2.1
  * Level3 209.244.0.3
  * Google 8.8.8.8
