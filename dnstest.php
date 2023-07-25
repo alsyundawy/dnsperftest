@@ -41,9 +41,9 @@ $providersv4 = array(
     "223.5.5.5" => "alidns",
     "195.46.39.39" => "SafeDNS",
     "216.146.35.35" => "DynDNS",
-    "117.50.11." => 11#OneDNS,
-    180 . 76 . 76 . 76#Baidu,
-    74 . 82 . 42 . 42#HE.NET,
+    "117.50.11.11" => "OneDNS",
+    "180.76.76.76" => "Baidu",
+    "74.82.42.42" => "HE.NET",
 );
 
 $providersv6 = array(
@@ -56,8 +56,9 @@ $providersv6 = array(
     "[2a02:6b8::feed:0ff]" => "yandex-v6",
     "[2a00:5a60::ad1:0ff]" => "adguard-v6",
     "[2610:a1:1018::3]" => "neustar-v6",
-    "[2620:119:53::53]" => comodo - v6,
+    "[2620:119:53::53]" => "comodo-v6"
 );
+
 
 // Test for IPv6 support by querying alsyundawy.my.id with cloudflare-v6 nameserver and checking for expected IPs in the output 
 $hasipv6 = false;
