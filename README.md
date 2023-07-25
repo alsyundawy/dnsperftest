@@ -3,6 +3,7 @@
 Shell script to test the performance of the most popular DNS resolvers from your location.
 
 Includes by default:
+ * Internal DNS Server (/etc/resolv)
  * CloudFlare 1.1.1.1
  * CloudFlare 1.1.1.2
  * Level3 4.2.2.1
