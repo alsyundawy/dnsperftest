@@ -77,7 +77,6 @@ Untuk macOS menggunakan homebrew :
  $ cd dnsperftest
  $ bash ./dnstest.sh 
                      test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average
-                     test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average
 127.0.0.1            1 ms    4 ms    4 ms    4 ms    1 ms    8 ms    4 ms    24 ms   20 ms   28 ms     9.80
 ::1                  1 ms    4 ms    1 ms    1 ms    4 ms    8 ms    4 ms    4 ms    1 ms    4 ms      3.20
 AliDNS               4 ms    4 ms    4 ms    4 ms    8 ms    1 ms    4 ms    12 ms   4 ms    1 ms      4.60
