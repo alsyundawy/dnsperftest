@@ -4,6 +4,7 @@ Skrip Shell untuk menguji kinerja penyelesai DNS paling populer dari lokasi Anda
 
 Termasuk secara default:
  * Internal DNS Server (/etc/resolv)
+ * BebasDNS 103.87.68.2
  * CloudFlare 1.1.1.1
  * CloudFlareMalware 1.1.1.2
  * Level3 4.2.2.1
