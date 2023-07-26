@@ -11,10 +11,10 @@ NAMESERVERS=$(grep "^nameserver" /etc/resolv.conf | cut -d " " -f 2 | sed 's/\(.
 # Define providers for IPv4 and IPv6
 PROVIDERSV4="
 1.1.1.1#cloudflare1
-1.1.1.2#cloudflare2
+1.1.1.2#cloudflareMalware
 8.8.8.8#google
 9.9.9.9#quad9
-208.67.222.123#opendns
+208.67.222.222#opendns
 176.103.130.132#adguard
 4.2.2.1#level3-1
 209.244.0.3#level3-2
@@ -33,11 +33,16 @@ PROVIDERSV4="
 117.50.11.11#OneDNS
 180.76.76.76#Baidu
 74.82.42.42#HE.NET
+194.187.251.67#CyberGhost
+198.54.117.10#SafeServe
+76.76.2.0#ControlD
+172.104.162.222#OpenNIC
+
 "
 
 PROVIDERSV6="
 2606:4700:4700::1111#cloudflare-v6
-2606:4700:4700::1112#cloudflare-v62
+2606:4700:4700::1112#cloudflareMalware-v6
 2001:4860:4860::8888#google-v6
 2620:fe::fe#quad9-v6
 2620:119:35::35#opendns-v6
@@ -46,6 +51,10 @@ PROVIDERSV6="
 2a00:5a60::ad1:0ff#adguard-v6
 2610:a1:1018::3#neustar-v6
 2620:119:53::53#comodo-v6
+2606:1a40::#ControlD-v6
+2400:8901::f03c:93ff:fe25:a89b#OpenNIC-v6
+2001:470:20::2#HE.NET-v6
+2620:74:1b::1:1#Verisign-v6
 "
 
 # Test for IPv6 support by querying alsyundawy.my.id with cloudflare-v6 nameserver and checking for expected IPs in the output 
