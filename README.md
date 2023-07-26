@@ -1,5 +1,17 @@
 # DNS Performance Test
 
+[![Latest Version](https://img.shields.io/github/v/release/alsyundawy/dnsperftest)](https://github.com/alsyundawy/dnsperftest/releases)
+[![Maintenance Status](https://img.shields.io/maintenance/yes/9999)](https://github.com/alsyundawy/dnsperftest/)
+[![License](https://img.shields.io/github/license/alsyundawy/dnsperftest)](https://github.com/alsyundawy/dnsperftest/blob/master/LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/alsyundawy/dnsperftest)](https://github.com/alsyundawy/dnsperftest/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/alsyundawy/dnsperftest)](https://github.com/alsyundawy/dnsperftest/pulls)
+[![Donate with PayPal](https://img.shields.io/badge/PayPal-donate-orange)](https://www.paypal.me/alsyundawy)
+[![Sponsor with GitHub](https://img.shields.io/badge/GitHub-sponsor-orange)](https://github.com/sponsors/alsyundawy)
+[![GitHub Stars](https://img.shields.io/github/stars/alsyundawy/dnsperftest?style=social)](https://github.com/alsyundawy/dnsperftest/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/alsyundawy/dnsperftest?style=social)](https://github.com/alsyundawy/dnsperftest/network/members)
+[![GitHub Contributors](https://img.shields.io/github/contributors/alsyundawy/dnsperftest?style=social)](https://github.com/alsyundawy/dnsperftest/graphs/contributors)
+
+
 Skrip Shell untuk menguji kinerja penyelesai DNS paling populer dari lokasi Anda.
 
 Termasuk secara default :
