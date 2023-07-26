@@ -1,8 +1,8 @@
 # DNS Performance Test
 
-Shell script to test the performance of the most popular DNS resolvers from your location.
+Skrip Shell untuk menguji kinerja penyelesai DNS paling populer dari lokasi Anda.
 
-Includes by default:
+Termasuk secara default:
  * Internal DNS Server (/etc/resolv)
  * CloudFlare 1.1.1.1
  * CloudFlare 1.1.1.2
@@ -42,28 +42,29 @@ Includes by default:
 
 # Required 
 
-You need to install bc and dig. 
+Anda perlu menginstal bc dan dig.
 
-For Ubuntu / Debian Based:
+Untuk Berbasis Ubuntu/Debian:
 
 ```
  $ sudo apt-get install bc dnsutils
 ```
 
-For RedHat / RPM Based:
+Untuk Berbasis RedHat / RPM:
 
 ```
  $ sudo yum install bc dnsutils
+OR
  $ sudo dnf install bc dnsutils
 ```
 
-For macOS using homebrew:
+Untuk macOS menggunakan homebrew:
 
 ```
  $ brew install bc bind
 ```
 
-# Utilization
+# Pemanfaatan
 
 ``` 
  $ git clone --depth=1 https://github.com/alsyundawy/dnsperftest/
@@ -97,7 +98,7 @@ Baidu                192 ms  84 ms   120 ms  100 ms  48 ms   88 ms   92 ms   168
 HE.NET               12 ms   12 ms   160 ms  16 ms   12 ms   16 ms   12 ms   12 ms   16 ms   24 ms     29.20
 ```
 
-To sort with the fastest first, add `sort -k 22 -n` at the end of the command:
+Untuk mengurutkan dengan yang tercepat terlebih dahulu, tambahkan `sort -k 22 -n` di akhir perintah:
 
 ```
   $ bash ./dnstest.sh | sort -k 22 -n
@@ -129,7 +130,7 @@ Baidu                192 ms  84 ms   120 ms  100 ms  48 ms   88 ms   92 ms   168
 HE.NET               12 ms   12 ms   160 ms  16 ms   12 ms   16 ms   12 ms   12 ms   16 ms   24 ms     29.20
 ```
 
-To test using the IPv6 addresses, add the IPv6 option:
+Untuk menguji menggunakan alamat IPv6, tambahkan opsi IPv6:
 
 ```
   $ bash ./dnstest.sh ipv6 | sort -k 22 -n
@@ -148,7 +149,8 @@ yandex-v6            216 ms  200 ms  200 ms  228 ms  220 ms  200 ms  232 ms  260
 adguard-v6           272 ms  260 ms  272 ms  260 ms  252 ms  264 ms  244 ms  480 ms  324 ms  252 ms    288.00
 ```
 
-To test both IPv6 and IPv4, add the "all" option:
+Untuk menguji IPv6 dan IPv4, tambahkan opsi "all":
+
 ```
   $ bash ./dnstest.sh all | sort -k 22 -n
                      test1   test2   test3   test4   test5   test6   test7   test8   test9   test10  Average
@@ -190,12 +192,11 @@ DNS.Watch            204 ms  1000 ms 176 ms  1000 ms 204 ms  1000 ms 1000 ms 100
 ```
 
 
-# For Windows users using the Linux subsystem
+# Untuk pengguna Windows yang menggunakan subsistem Linux
 
-If you receive an error `$'\r': command not found`, convert the file to a Linux-compatible line endings using:
+Jika Anda menerima kesalahan `$'\r': command not found`, konversikan file ke akhiran baris yang kompatibel dengan Linux menggunakan : (Titikd Dua/Colon)
 
-
-# Credit Special Thank's To CleanBrowsing
+# Terima kasih khusus untuk CleanBrowsing
 
 **Anda bebas untuk mengubah, mendistribusikan script ini untuk keperluan anda**
 
