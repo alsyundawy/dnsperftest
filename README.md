@@ -5,7 +5,7 @@ Skrip Shell untuk menguji kinerja penyelesai DNS paling populer dari lokasi Anda
 Termasuk secara default:
  * Internal DNS Server (/etc/resolv)
  * CloudFlare 1.1.1.1
- * CloudFlare 1.1.1.2
+ * CloudFlareMalware 1.1.1.2
  * Level3 4.2.2.1
  * Level3 209.244.0.3
  * Google 8.8.8.8
@@ -27,6 +27,11 @@ Termasuk secara default:
  * Baidu 180.76.76.76
  * HE.NET 74.82.42.42
  * DNS.Watch 84.200.69.80
+ * CyberGhost 194.187.251.67
+ * SafeServe 198.54.117.10
+ * ControlD 76.76.2.0
+ * OpenNIC 172.104.162.222
+
 
  # List Domain Test
  * google.com
