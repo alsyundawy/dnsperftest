@@ -10,25 +10,25 @@ NAMESERVERS=$(grep "^nameserver" /etc/resolv.conf | cut -d " " -f 2 | sed 's/\(.
 
 # Define providers for IPv4 and IPv6
 PROVIDERSV4="
+223.5.5.5#AliDNS
 103.87.68.23#BebasDNS-Malware
-1.1.1.1#cloudflare
-1.1.1.2#cloudflareMalware
-8.8.8.8#google
-9.9.9.9#quad9
-208.67.222.222#opendns
-176.103.130.132#adguard
-4.2.2.1#level3-1
-209.244.0.3#level3-2
-80.80.80.80#freenom
+1.1.1.1#Cloudflare
+1.1.1.2#CloudflareMalware
+8.8.8.8#Google
+9.9.9.9#Quad9
+208.67.222.222#OpenDNS
+176.103.130.132#Adguard
+4.2.2.1#Level3-1
+209.244.0.3#Level3-2
+80.80.80.80#Freenom
 84.200.69.80#DNS.Watch
-199.85.126.20#norton
-185.228.168.168#cleanbrowsing
-77.88.8.7#yandex
-156.154.70.3#neustar
-8.26.56.26#comodo
-45.90.28.202#nextdns
+199.85.126.20#Norton
+185.228.168.168#CleanBrowsing
+77.88.8.7#Yandex
+156.154.70.3#Meustar
+8.26.56.26#Comodo
+45.90.28.202#NextDNS
 64.6.64.6#Verisign
-223.5.5.5#alidns
 195.46.39.39#SafeDNS
 216.146.35.35#DynDNS
 117.50.11.11#OneDNS
@@ -41,21 +41,22 @@ PROVIDERSV4="
 "
 
 PROVIDERSV6="
-2001:df1:7340:c::beba:51d#BebasDNS-Malware
-2606:4700:4700::1111#cloudflare-v6
-2606:4700:4700::1112#cloudflareMalware-v6
-2001:4860:4860::8888#google-v6
-2620:fe::fe#quad9-v6
-2620:119:35::35#opendns-v6
-2a0d:2a00:1::1#cleanbrowsing-v6
-2a02:6b8::feed:0ff#yandex-v6
-2a00:5a60::ad1:0ff#adguard-v6
-2610:a1:1018::3#neustar-v6
-2620:119:53::53#comodo-v6
+2400:3200::1#AliDNS-v6
+2606:4700:4700::1111#Cloudflare-v6
+2606:4700:4700::1112#CloudflareMalware-v6
+2001:4860:4860::8888#Google-v6
+2620:fe::fe#Quad9-v6
+2620:119:35::35#Opendns-v6
+2a0d:2a00:1::1#CleanBrowsing-v6
+2a02:6b8::feed:0ff#Yandex-v6
+2a00:5a60::ad1:0ff#Adguard-v6
+2610:a1:1018::3#Neustar-v6
+2620:119:53::53#Comodo-v6
 2606:1a40::#ControlD-v6
 2400:8901::f03c:93ff:fe25:a89b#OpenNIC-v6
 2001:470:20::2#HE.NET-v6
 2620:74:1b::1:1#Verisign-v6
+2001:df1:7340:c::beba:51d#BebasDNS-Malware-v6
 "
 
 # Test for IPv6 support by querying alsyundawy.my.id with cloudflare-v6 nameserver and checking for expected IPs in the output 
