@@ -10,7 +10,8 @@ NAMESERVERS=$(grep "^nameserver" /etc/resolv.conf | cut -d " " -f 2 | sed 's/\(.
 
 # Define providers for IPv4 and IPv6
 PROVIDERSV4="
-1.1.1.1#cloudflare1
+103.87.68.23#BebasDNS-Malware
+1.1.1.1#cloudflare
 1.1.1.2#cloudflareMalware
 8.8.8.8#google
 9.9.9.9#quad9
@@ -37,10 +38,10 @@ PROVIDERSV4="
 198.54.117.10#SafeServe
 76.76.2.0#ControlD
 172.104.162.222#OpenNIC
-
 "
 
 PROVIDERSV6="
+2001:df1:7340:c::beba:51d#BebasDNS-Malware
 2606:4700:4700::1111#cloudflare-v6
 2606:4700:4700::1112#cloudflareMalware-v6
 2001:4860:4860::8888#google-v6
