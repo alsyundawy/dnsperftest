@@ -2,7 +2,7 @@
 
 Skrip Shell untuk menguji kinerja penyelesai DNS paling populer dari lokasi Anda.
 
-Termasuk secara default:
+Termasuk secara default :
  * Internal DNS Server (/etc/resolv)
  * BebasDNS 103.87.68.2
  * CloudFlare 1.1.1.1
@@ -50,13 +50,13 @@ Termasuk secara default:
 
 Anda perlu menginstal bc dan dig.
 
-Untuk Berbasis Ubuntu/Debian:
+Untuk Berbasis Ubuntu/Debian :
 
 ```
  $ sudo apt-get install bc dnsutils
 ```
 
-Untuk Berbasis RedHat / RPM:
+Untuk Berbasis RedHat / RPM :
 
 ```
  $ sudo yum install bc dnsutils
@@ -64,7 +64,7 @@ OR
  $ sudo dnf install bc dnsutils
 ```
 
-Untuk macOS menggunakan homebrew:
+Untuk macOS menggunakan homebrew :
 
 ```
  $ brew install bc bind
@@ -104,7 +104,7 @@ Baidu                192 ms  84 ms   120 ms  100 ms  48 ms   88 ms   92 ms   168
 HE.NET               12 ms   12 ms   160 ms  16 ms   12 ms   16 ms   12 ms   12 ms   16 ms   24 ms     29.20
 ```
 
-Untuk mengurutkan dengan yang tercepat terlebih dahulu, tambahkan `sort -k 22 -n` di akhir perintah:
+Untuk mengurutkan dengan yang tercepat terlebih dahulu, tambahkan `sort -k 22 -n` di akhir perintah :
 
 ```
   $ bash ./dnstest.sh | sort -k 22 -n
@@ -136,7 +136,7 @@ Baidu                192 ms  84 ms   120 ms  100 ms  48 ms   88 ms   92 ms   168
 HE.NET               12 ms   12 ms   160 ms  16 ms   12 ms   16 ms   12 ms   12 ms   16 ms   24 ms     29.20
 ```
 
-Untuk menguji menggunakan alamat IPv6, tambahkan opsi IPv6:
+Untuk menguji menggunakan alamat IPv6, tambahkan opsi "IPv6" :
 
 ```
   $ bash ./dnstest.sh ipv6 | sort -k 22 -n
@@ -155,7 +155,7 @@ yandex-v6            216 ms  200 ms  200 ms  228 ms  220 ms  200 ms  232 ms  260
 adguard-v6           272 ms  260 ms  272 ms  260 ms  252 ms  264 ms  244 ms  480 ms  324 ms  252 ms    288.00
 ```
 
-Untuk menguji IPv6 dan IPv4, tambahkan opsi "all":
+Untuk menguji IPv6 dan IPv4, tambahkan opsi "all" :
 
 ```
   $ bash ./dnstest.sh all | sort -k 22 -n
@@ -202,7 +202,7 @@ DNS.Watch            204 ms  1000 ms 176 ms  1000 ms 204 ms  1000 ms 1000 ms 100
 
 Jika Anda menerima kesalahan `$'\r': command not found`, konversikan file ke akhiran baris yang kompatibel dengan Linux menggunakan : (Titikd Dua/Colon)
 
-# Terima kasih khusus untuk CleanBrowsing
+# Terima kasih Khususnya Untuk CleanBrowsing
 
 **Anda bebas untuk mengubah, mendistribusikan script ini untuk keperluan anda**
 
