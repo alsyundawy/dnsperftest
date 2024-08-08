@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-
+# Check for required commands
 command -v bc > /dev/null || { echo "error: bc was not found. Please install bc."; exit 1; }
 { command -v drill > /dev/null && dig=drill; } || { command -v dig > /dev/null && dig=dig; } || { echo "error: dig was not found. Please install dnsutils."; exit 1; }
 
+# Extract nameservers from /etc/resolv.conf
+NAMESERVERS=$(awk '/^nameserver/ {print $2}' /etc/resolv.conf | sed 's/\(.*\)/&#&/')
 
-NAMESERVERS=`cat /etc/resolv.conf | grep ^nameserver | cut -d " " -f 2 | sed 's/\(.*\)/&#&/'`
-
-PROVIDERSV4="
+# Define DNS providers
+PROVIDERSV4=$(cat <<EOF
 223.5.5.5#AliDNS
 103.87.68.23#BebasDNS-Malware
 1.1.1.1#Cloudflare
@@ -23,7 +24,7 @@ PROVIDERSV4="
 199.85.126.20#Norton
 185.228.168.168#CleanBrowsing
 77.88.8.7#Yandex
-156.154.70.3#Meustar
+156.154.70.3#Neustar
 8.26.56.26#Comodo
 45.90.28.202#NextDNS
 64.6.64.6#Verisign
@@ -36,15 +37,16 @@ PROVIDERSV4="
 198.54.117.10#SafeServe
 76.76.2.0#ControlD
 172.104.162.222#OpenNIC
-"
+EOF
+)
 
-PROVIDERSV6="
+PROVIDERSV6=$(cat <<EOF
 2400:3200::1#AliDNS-v6
 2606:4700:4700::1111#Cloudflare-v6
 2606:4700:4700::1112#CloudflareMalware-v6
 2001:4860:4860::8888#Google-v6
 2620:fe::fe#Quad9-v6
-2620:119:35::35#Opendns-v6
+2620:119:35::35#OpenDNS-v6
 2a0d:2a00:1::1#CleanBrowsing-v6
 2a02:6b8::feed:0ff#Yandex-v6
 2a00:5a60::ad1:0ff#Adguard-v6
@@ -55,50 +57,48 @@ PROVIDERSV6="
 2001:470:20::2#HE.NET-v6
 2620:74:1b::1:1#Verisign-v6
 2001:df1:7340:c::beba:51d#BebasDNS-Malware-v6
-"
+EOF
+)
 
-# Testing for IPv6
-if dig +short +tries=1 +time=2 +stats @2606:4700:4700::1111 alsyundawy.my.id | grep -q '172\.67\.134\.149\|104\.21\.6\.70'; then 
+# Test for IPv6 support
+hasipv6=""
+if $dig +short +tries=1 +time=2 @2606:4700:4700::1111 alsyundawy.my.id | grep -q -E '172\.67\.134\.149|104\.21\.6\.70'; then 
     hasipv6="true"
 fi
 
+# Determine providers to test based on input
 providerstotest=$PROVIDERSV4
-
-if [ "x$1" = "xipv6" ]; then
-    if [ "x$hasipv6" = "x" ]; then
-        echo "error: IPv6 support not found. Unable to do the ipv6 test."; exit 1;
-    fi
-    providerstotest=$PROVIDERSV6
-
-elif [ "x$1" = "xipv4" ]; then
-    providerstotest=$PROVIDERSV4
-
-elif [ "x$1" = "xall" ]; then
-    if [ "x$hasipv6" = "x" ]; then
+case "$1" in
+    ipv6)
+        if [ -z "$hasipv6" ]; then
+            echo "error: IPv6 support not found. Unable to do the ipv6 test."
+            exit 1
+        fi
+        providerstotest=$PROVIDERSV6
+        ;;
+    ipv4)
         providerstotest=$PROVIDERSV4
-    else
-        providerstotest="$PROVIDERSV4 $PROVIDERSV6"
-    fi
-else
-    providerstotest=$PROVIDERSV4
-fi
+        ;;
+    all)
+        providerstotest="$PROVIDERSV4"
+        if [ -n "$hasipv6" ]; then
+            providerstotest="$PROVIDERSV4 $PROVIDERSV6"
+        fi
+        ;;
+esac
 
-    
-
-# Domains to test. Duplicated domains are ok
+# Domains to test
 DOMAINS2TEST="google.com amazon.com facebook.com www.youtube.com www.reddit.com wikipedia.org twitter.com www.tokopedia.com whatsapp.com tiktok.com"
 
-
-totaldomains=0
+# Display header
+totaldomains=$(echo $DOMAINS2TEST | wc -w)
 printf "%-21s" ""
-for d in $DOMAINS2TEST; do
-    totaldomains=$((totaldomains + 1))
-    printf "%-8s" "test$totaldomains"
+for i in $(seq 1 $totaldomains); do
+    printf "%-8s" "test$i"
 done
-printf "%-8s" "Average"
-echo ""
+printf "%-8s\n" "Average"
 
-
+# Perform tests
 for p in $NAMESERVERS $providerstotest; do
     pip=${p%%#*}
     pname=${p##*#}
@@ -106,21 +106,13 @@ for p in $NAMESERVERS $providerstotest; do
 
     printf "%-21s" "$pname"
     for d in $DOMAINS2TEST; do
-        ttime=`$dig +tries=1 +time=2 +stats @$pip $d |grep "Query time:" | cut -d : -f 2- | cut -d " " -f 2`
-        if [ -z "$ttime" ]; then
-	        #let's have time out be 1s = 1000ms
-	        ttime=1000
-        elif [ "x$ttime" = "x0" ]; then
-	        ttime=1
-	    fi
-
-        printf "%-8s" "$ttime ms"
+        ttime=$($dig +tries=1 +time=2 +stats @$pip $d | awk '/Query time:/ {print $4}')
+        ttime=${ttime:-1000}
+        printf "%-8s" "${ttime}ms"
         ftime=$((ftime + ttime))
     done
-    avg=`bc -l <<< "scale=2; $ftime/$totaldomains"`
-
-    echo "  $avg"
+    avg=$(bc <<< "scale=2; $ftime/$totaldomains")
+    printf "%-8s\n" "$avg"
 done
 
-
-exit 0;
+exit 0
