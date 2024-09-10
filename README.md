@@ -11,6 +11,11 @@
 [![GitHub Forks](https://img.shields.io/github/forks/alsyundawy/dnsperftest?style=social)](https://github.com/alsyundawy/dnsperftest/network/members)
 [![GitHub Contributors](https://img.shields.io/github/contributors/alsyundawy/dnsperftest?style=social)](https://github.com/alsyundawy/dnsperftest/graphs/contributors)
 
+**If you find this project helpful and would like to support it, please consider donating via https://www.paypal.me/alsyundawy. Thank you for your support!**
+
+**Jika Anda merasa terbantu dan ingin mendukung proyek ini, pertimbangkan untuk berdonasi melalui https://www.paypal.me/alsyundawy. Terima kasih atas dukungannya!**
+
+
 
 Skrip Shell untuk menguji kinerja penyelesai DNS paling populer dari lokasi Anda.
 
