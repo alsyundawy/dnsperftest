@@ -61,8 +61,10 @@ PROVIDERSV6="
 "
 
 # Test for IPv6 support
-if $dig +short +tries=1 +time=2 @2606:4700:4700::1111 alsyundawy.my.id | grep -qE '172\.67\.134\.149|104\.21\.6\.70'; then 
+if $dig +short -6 @2606:4700:4700::1111 cloudflare.com > /dev/null; then 
     hasipv6=true
+else
+    hasipv6=false
 fi
 
 # Determine providers to test
