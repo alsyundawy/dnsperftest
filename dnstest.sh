@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
 # Check for required commands
-command -v bc > /dev/null || { echo "error: bc was not found. Please install bc."; exit 1; }
-{ command -v drill > /dev/null && dig=drill; } || { command -v dig > /dev/null && dig=dig; } || { echo "error: dig was not found. Please install dnsutils."; exit 1; }
+command -v bc > /dev/null || { echo "error: bc not found. Please install bc."; exit 1; }
+command -v drill > /dev/null && dig="drill" || { command -v dig > /dev/null && dig="dig" || { echo "error: dig not found. Please install dnsutils."; exit 1; } }
 
 # Extract nameservers from /etc/resolv.conf
-NAMESERVERS=$(awk '/^nameserver/ {print $2}' /etc/resolv.conf | sed 's/\(.*\)/&#&/')
+NAMESERVERS=$(awk '/^nameserver/ {print $2}' /etc/resolv.conf)
 
 # Define DNS providers
-PROVIDERSV4=$(cat <<EOF
+PROVIDERSV4="
+42.247.23.161#DNS-BERSAMA
 223.5.5.5#AliDNS
 103.87.68.23#BebasDNS-Malware
 1.1.1.1#Cloudflare
@@ -37,10 +38,10 @@ PROVIDERSV4=$(cat <<EOF
 198.54.117.10#SafeServe
 76.76.2.0#ControlD
 172.104.162.222#OpenNIC
-EOF
-)
+"
 
-PROVIDERSV6=$(cat <<EOF
+PROVIDERSV6="
+2402:1200:155:23:43:247:23:161#DNS-BERSAMA-v6
 2400:3200::1#AliDNS-v6
 2606:4700:4700::1111#Cloudflare-v6
 2606:4700:4700::1112#CloudflareMalware-v6
@@ -57,33 +58,22 @@ PROVIDERSV6=$(cat <<EOF
 2001:470:20::2#HE.NET-v6
 2620:74:1b::1:1#Verisign-v6
 2001:df1:7340:c::beba:51d#BebasDNS-Malware-v6
-EOF
-)
+"
 
 # Test for IPv6 support
-hasipv6=""
-if $dig +short +tries=1 +time=2 @2606:4700:4700::1111 alsyundawy.my.id | grep -q -E '172\.67\.134\.149|104\.21\.6\.70'; then 
-    hasipv6="true"
+if $dig +short +tries=1 +time=2 @2606:4700:4700::1111 alsyundawy.my.id | grep -qE '172\.67\.134\.149|104\.21\.6\.70'; then 
+    hasipv6=true
 fi
 
-# Determine providers to test based on input
+# Determine providers to test
 providerstotest=$PROVIDERSV4
 case "$1" in
     ipv6)
-        if [ -z "$hasipv6" ]; then
-            echo "error: IPv6 support not found. Unable to do the ipv6 test."
-            exit 1
-        fi
+        [ -z "$hasipv6" ] && { echo "error: IPv6 support not found."; exit 1; }
         providerstotest=$PROVIDERSV6
         ;;
-    ipv4)
-        providerstotest=$PROVIDERSV4
-        ;;
     all)
-        providerstotest="$PROVIDERSV4"
-        if [ -n "$hasipv6" ]; then
-            providerstotest="$PROVIDERSV4 $PROVIDERSV6"
-        fi
+        [ -n "$hasipv6" ] && providerstotest="$PROVIDERSV4 $PROVIDERSV6"
         ;;
 esac
 
@@ -91,11 +81,9 @@ esac
 DOMAINS2TEST="google.com amazon.com facebook.com www.youtube.com www.reddit.com wikipedia.org twitter.com www.tokopedia.com whatsapp.com tiktok.com"
 
 # Display header
-totaldomains=$(echo $DOMAINS2TEST | wc -w)
+totaldomains=$(wc -w <<< "$DOMAINS2TEST")
 printf "%-21s" ""
-for i in $(seq 1 $totaldomains); do
-    printf "%-8s" "test$i"
-done
+for i in $(seq 1 $totaldomains); do printf "%-8s" "test$i"; done
 printf "%-8s\n" "Average"
 
 # Perform tests
@@ -103,14 +91,15 @@ for p in $NAMESERVERS $providerstotest; do
     pip=${p%%#*}
     pname=${p##*#}
     ftime=0
-
     printf "%-21s" "$pname"
+    
     for d in $DOMAINS2TEST; do
         ttime=$($dig +tries=1 +time=2 +stats @$pip $d | awk '/Query time:/ {print $4}')
         ttime=${ttime:-1000}
         printf "%-8s" "${ttime}ms"
         ftime=$((ftime + ttime))
     done
+    
     avg=$(bc <<< "scale=2; $ftime/$totaldomains")
     printf "%-8s\n" "$avg"
 done
